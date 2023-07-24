@@ -1,0 +1,32 @@
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    
+    TreeNode(int val) {
+        this.val = val;
+    }
+}
+
+public class Solution {
+    public int sumNumbers(TreeNode root) {
+        return calculateSum(root, 0);
+    }
+    
+    private int calculateSum(TreeNode node, int currentSum) {
+        if (node == null) {
+            return 0;
+        }
+        
+        int updatedSum = currentSum * 10 + node.val;
+        
+        if (node.left == null && node.right == null) {
+            return updatedSum;
+        }
+        
+        int leftSum = calculateSum(node.left, updatedSum);
+        int rightSum = calculateSum(node.right, updatedSum);
+        
+        return leftSum + rightSum;
+    }
+}
